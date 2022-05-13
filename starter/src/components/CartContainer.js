@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../features/cartSlice";
 import CartItem from "./CartItem";
 
-const CartContainer = () => {
+import { openModal } from "../features/modalSlice";
 
-   const dispatch = useDispatch()
+const CartContainer = () => {
+   const dispatch = useDispatch();
 
    // contient un tableau d'objet
    const cartItems = useSelector((store) => store.cartSliceStore.cartItems);
@@ -36,6 +37,7 @@ const CartContainer = () => {
                         price={item.price}
                         img={item.img}
                         amount={item.amount}
+                        id={item.id}
                      />
                   );
                })}
@@ -47,8 +49,14 @@ const CartContainer = () => {
                      total <span> ${total} </span>
                   </h4>
                </div>
-               <button className="btn clear-btn"
-               onClick={()=>{dispatch(clearCart())}}>clear cart</button>
+               <button
+                  className="btn clear-btn"
+                  onClick={() => {
+                     dispatch(openModal());
+                  }}
+               >
+                  clear cart
+               </button>
             </footer>
          </section>
       );
